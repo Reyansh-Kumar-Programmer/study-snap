@@ -33,6 +33,10 @@ export default function ProfileScreen() {
 
     return (
         <View style={styles.container}>
+            {/* Background Decorative Blobs */}
+            <View style={styles.blobBlue} />
+            <View style={styles.blobYellow} />
+
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity
@@ -75,7 +79,7 @@ export default function ProfileScreen() {
 
                 {/* ── Achievement Banner ── */}
                 <Animated.View entering={FadeInDown.duration(500).delay(200).springify()}>
-                    <View style={styles.achievementCard}>
+                    <View style={[styles.achievementCard, styles.yellowShadow]}>
                         <View style={styles.trophyWrapper}>
                             <View style={styles.trophyGlow} />
                             <LinearGradient
@@ -99,19 +103,29 @@ export default function ProfileScreen() {
 
                 {/* ── Stats Row ── */}
                 <Animated.View entering={FadeInDown.duration(500).delay(300).springify()} style={styles.statsRow}>
-                    {[
-                        { icon: 'camera', color: '#3B82F6', bg: '#DBEAFE', value: totalScans, label: 'Scans' },
-                        { icon: 'bulb', color: '#8B5CF6', bg: '#EDE9FE', value: totalQuizzes, label: 'Quizzes' },
-                        { icon: 'flame', color: '#F59E0B', bg: '#FEF3C7', value: 7, label: 'Streak' },
-                    ].map((s, i) => (
-                        <View key={i} style={styles.statCard}>
-                            <View style={[styles.statIconPill, { backgroundColor: s.bg }]}>
-                                <Ionicons name={s.icon as any} size={20} color={s.color} />
-                            </View>
-                            <Text style={styles.statValue}>{s.value}</Text>
-                            <Text style={styles.statLabel}>{s.label}</Text>
+                    <View style={[styles.statCard, styles.blueShadow]}>
+                        <View style={[styles.statIconPill, { backgroundColor: '#DBEAFE' }]}>
+                            <Ionicons name="camera" size={20} color="#3B82F6" />
                         </View>
-                    ))}
+                        <Text style={styles.statValue}>{totalScans}</Text>
+                        <Text style={styles.statLabel}>Scans</Text>
+                    </View>
+
+                    <View style={[styles.statCard, styles.blueShadow]}>
+                        <View style={[styles.statIconPill, { backgroundColor: '#EDE9FE' }]}>
+                            <Ionicons name="bulb" size={20} color="#8B5CF6" />
+                        </View>
+                        <Text style={styles.statValue}>{totalQuizzes}</Text>
+                        <Text style={styles.statLabel}>Quizzes</Text>
+                    </View>
+
+                    <View style={[styles.statCard, styles.yellowShadow]}>
+                        <View style={[styles.statIconPill, { backgroundColor: '#FEF3C7' }]}>
+                            <Ionicons name="flame" size={20} color="#F59E0B" />
+                        </View>
+                        <Text style={styles.statValue}>7</Text>
+                        <Text style={styles.statLabel}>Streak</Text>
+                    </View>
                 </Animated.View>
 
                 {/* ── Pro Upgrade ── */}
@@ -191,14 +205,24 @@ export default function ProfileScreen() {
 
 /* ───────────────────────── Styles ───────────────────────── */
 
-const CARD_SHADOW = Platform.select({
+const BLUE_SHADOW = Platform.select({
     ios: {
         shadowColor: '#3B82F6',
         shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.10,
+        shadowOpacity: 0.12,
         shadowRadius: 18,
     },
-    android: { elevation: 5 },
+    android: { elevation: 6 },
+}) as any;
+
+const YELLOW_SHADOW = Platform.select({
+    ios: {
+        shadowColor: '#FF9800',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.15,
+        shadowRadius: 18,
+    },
+    android: { elevation: 6 },
 }) as any;
 
 const CARD_BORDER = {
@@ -211,11 +235,34 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F8FAFC',
+        overflow: 'hidden',
+    },
+    blobBlue: {
+        position: 'absolute',
+        top: -50,
+        right: -50,
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        backgroundColor: '#3B82F608',
+        zIndex: -1,
+    },
+    blobYellow: {
+        position: 'absolute',
+        top: 250,
+        left: -80,
+        width: 300,
+        height: 300,
+        borderRadius: 150,
+        backgroundColor: '#FFC10705',
+        zIndex: -1,
     },
     scrollContent: {
         paddingHorizontal: 20,
         paddingTop: 4,
     },
+    blueShadow: BLUE_SHADOW,
+    yellowShadow: YELLOW_SHADOW,
 
     /* ── Header ── */
     header: {
@@ -225,7 +272,7 @@ const styles = StyleSheet.create({
         paddingTop: 60,
         paddingHorizontal: 20,
         paddingBottom: 12,
-        backgroundColor: '#F8FAFC',
+        backgroundColor: 'transparent',
     },
     backButton: {
         width: 40,
@@ -235,7 +282,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         ...CARD_BORDER,
-        ...CARD_SHADOW,
+        ...BLUE_SHADOW,
     },
     headerTitle: {
         fontSize: 20,
@@ -314,7 +361,6 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         marginBottom: 24,
         ...CARD_BORDER,
-        ...CARD_SHADOW,
     },
     trophyWrapper: {
         position: 'relative',
@@ -390,7 +436,6 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         alignItems: 'center',
         ...CARD_BORDER,
-        ...CARD_SHADOW,
     },
     statIconPill: {
         width: 42,
@@ -498,7 +543,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginBottom: 12,
         ...CARD_BORDER,
-        ...CARD_SHADOW,
+        ...BLUE_SHADOW,
     },
     menuIcon: {
         width: 40,
