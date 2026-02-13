@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getHistory } from '@/services/storageService';
 import { useFocusEffect, useRouter } from 'expo-router';
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
@@ -85,7 +85,7 @@ export default function ProfileScreen() {
                             style={styles.statCard}
                         >
                             <View style={[styles.statIconContainer, { backgroundColor: stat.color + '20' }]}>
-                                <Ionicons name={stat.icon as any} size={24} color={stat.color} />
+                                <FontAwesome name={stat.icon as any} size={24} color={stat.color} />
                             </View>
                             <Text style={styles.statValue}>{stat.value}</Text>
                             <Text style={styles.statLabel}>{stat.label}</Text>
