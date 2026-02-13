@@ -76,12 +76,15 @@ export default function ProfileScreen() {
                 {/* ── Achievement Banner ── */}
                 <Animated.View entering={FadeInDown.duration(500).delay(200).springify()}>
                     <View style={styles.achievementCard}>
-                        <LinearGradient
-                            colors={['#FFC107', '#FF9800']}
-                            style={styles.trophyPill}
-                        >
-                            <Ionicons name="trophy" size={24} color="white" />
-                        </LinearGradient>
+                        <View style={styles.trophyWrapper}>
+                            <View style={styles.trophyGlow} />
+                            <LinearGradient
+                                colors={['#FFC107', '#FF9800']}
+                                style={styles.trophyPill}
+                            >
+                                <Ionicons name="trophy" size={24} color="white" />
+                            </LinearGradient>
+                        </View>
 
                         <View style={styles.achievementText}>
                             <Text style={styles.achievementTitle}>Study Champion</Text>
@@ -313,13 +316,37 @@ const styles = StyleSheet.create({
         ...CARD_BORDER,
         ...CARD_SHADOW,
     },
+    trophyWrapper: {
+        position: 'relative',
+        width: 52,
+        height: 52,
+        marginRight: 14,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    trophyGlow: {
+        position: 'absolute',
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+        backgroundColor: '#FFC107',
+        opacity: 0.4,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#FFC107',
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 1,
+                shadowRadius: 15,
+            },
+            android: { elevation: 12 },
+        }),
+    },
     trophyPill: {
         width: 52,
         height: 52,
         borderRadius: 16,
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 14,
     },
     achievementText: {
         flex: 1,
