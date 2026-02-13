@@ -68,9 +68,6 @@ export default function ProfileScreen() {
                     style={styles.avatarSection}
                 >
                     <View style={styles.avatarWrapper}>
-                        {/* Blue glow effect */}
-                        <View style={styles.avatarGlow} />
-
                         <LinearGradient
                             colors={['#3B82F6', '#2563EB']}
                             style={styles.avatarGradient}
@@ -96,7 +93,6 @@ export default function ProfileScreen() {
                     entering={FadeInDown.duration(600).delay(200)}
                     style={styles.achievementWrapper}
                 >
-                    <View style={styles.achievementGlow} />
                     <View style={styles.achievementCard}>
                         <LinearGradient
                             colors={['#FFC107', '#FF9800']}
@@ -142,7 +138,6 @@ export default function ProfileScreen() {
                     entering={FadeInDown.duration(600).delay(700)}
                     style={styles.proWrapper}
                 >
-                    <View style={styles.proGlow} />
                     <LinearGradient
                         colors={['#1E56B1', '#2563EB']}
                         start={{ x: 0, y: 0 }}
