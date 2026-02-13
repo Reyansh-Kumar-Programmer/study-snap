@@ -87,7 +87,7 @@ export default function HomeScreen() {
                     <View style={styles.statCard}>
                         <View style={styles.statHeader}>
                             <View style={[styles.statIcon, { backgroundColor: '#F59E0B' }]}>
-                                <FontAwesome name="fire" size={16} color="white" />
+                                <Ionicons name="flame" size={20} color="white" />
                             </View>
                             <View style={styles.badgeSuccess}>
                                 <Text style={styles.badgeText}>+2</Text>
@@ -101,7 +101,7 @@ export default function HomeScreen() {
                     <View style={styles.statCard}>
                         <View style={styles.statHeader}>
                             <View style={[styles.statIcon, { backgroundColor: Colors.primary }]}>
-                                <FontAwesome name="trophy" size={16} color="white" />
+                                <Ionicons name="trophy" size={18} color="white" />
                             </View>
                         </View>
                         <Text style={styles.statValue}>12</Text>
