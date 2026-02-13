@@ -48,8 +48,8 @@ export default function ProfileScreen() {
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <TouchableOpacity 
-                    style={styles.backButton} 
+                <TouchableOpacity
+                    style={styles.backButton}
                     onPress={() => handlePress(() => router.back())}
                     activeOpacity={0.7}
                 >
@@ -58,27 +58,27 @@ export default function ProfileScreen() {
                 <Text style={styles.headerTitle}>Profile</Text>
             </View>
 
-            <ScrollView 
-                showsVerticalScrollIndicator={false} 
+            <ScrollView
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
             >
                 {/* Avatar Section */}
-                <Animated.View 
-                    entering={FadeInDown.duration(600).delay(100)} 
+                <Animated.View
+                    entering={FadeInDown.duration(600).delay(100)}
                     style={styles.avatarSection}
                 >
                     <View style={styles.avatarWrapper}>
                         {/* Blue glow effect */}
                         <View style={styles.avatarGlow} />
-                        
+
                         <LinearGradient
                             colors={['#3B82F6', '#2563EB']}
                             style={styles.avatarGradient}
                         >
                             <Ionicons name="person" size={64} color="white" />
                         </LinearGradient>
-                        
-                        <TouchableOpacity 
+
+                        <TouchableOpacity
                             style={styles.cameraButton}
                             onPress={() => handlePress()}
                             activeOpacity={0.7}
@@ -86,13 +86,13 @@ export default function ProfileScreen() {
                             <Ionicons name="camera" size={20} color="#1E293B" />
                         </TouchableOpacity>
                     </View>
-                    
+
                     <Text style={styles.userName}>Alex Johnson</Text>
                     <Text style={styles.userEmail}>alex.johnson@email.com</Text>
                 </Animated.View>
 
                 {/* Achievement Card */}
-                <Animated.View 
+                <Animated.View
                     entering={FadeInDown.duration(600).delay(200)}
                     style={styles.achievementWrapper}
                 >
@@ -104,12 +104,12 @@ export default function ProfileScreen() {
                         >
                             <Ionicons name="trophy" size={28} color="white" />
                         </LinearGradient>
-                        
+
                         <View style={styles.achievementContent}>
                             <Text style={styles.achievementTitle}>Study Champion</Text>
                             <Text style={styles.achievementSubtitle}>Completed 7-day streak</Text>
                         </View>
-                        
+
                         <View style={styles.newBadge}>
                             <Text style={styles.newBadgeText}>NEW</Text>
                         </View>
@@ -138,7 +138,7 @@ export default function ProfileScreen() {
                 </View>
 
                 {/* Pro Plan Card */}
-                <Animated.View 
+                <Animated.View
                     entering={FadeInDown.duration(600).delay(700)}
                     style={styles.proWrapper}
                 >
@@ -152,19 +152,19 @@ export default function ProfileScreen() {
                         {/* Decorative circles */}
                         <View style={[styles.proCircle, { top: -30, right: -30, width: 120, height: 120 }]} />
                         <View style={[styles.proCircle, { bottom: -40, left: -20, width: 100, height: 100 }]} />
-                        
+
                         <View style={styles.proContent}>
                             <View style={styles.proHeader}>
                                 <MaterialCommunityIcons name="crown-outline" size={24} color="#FFD700" />
                                 <Text style={styles.proLabel}>Pro Plan</Text>
                             </View>
-                            
+
                             <Text style={styles.proTitle}>Unlock Unlimited Scans</Text>
                             <Text style={styles.proSubtitle}>
                                 Get unlimited scans, priority processing, and advanced AI features
                             </Text>
-                            
-                            <TouchableOpacity 
+
+                            <TouchableOpacity
                                 style={styles.upgradeButton}
                                 onPress={() => handlePress()}
                                 activeOpacity={0.8}
@@ -183,7 +183,7 @@ export default function ProfileScreen() {
                             key={item.label}
                             entering={FadeInDown.duration(600).delay(800 + index * 100)}
                         >
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 style={styles.menuItem}
                                 onPress={() => handlePress()}
                                 activeOpacity={0.7}
@@ -200,7 +200,7 @@ export default function ProfileScreen() {
 
                 {/* Log Out */}
                 <Animated.View entering={FadeInDown.duration(600).delay(1100)}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.logoutButton}
                         onPress={() => handlePress()}
                         activeOpacity={0.7}
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#1E293B',
     },
-    
+
     // Avatar Section
     avatarSection: {
         alignItems: 'center',
@@ -260,23 +260,11 @@ const styles = StyleSheet.create({
     },
     avatarWrapper: {
         position: 'relative',
-        width: 140,
-        height: 140,
+        width: 120,
+        height: 120,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
-    },
-    avatarGlow: {
-        position: 'absolute',
-        width: 140,
-        height: 140,
-        borderRadius: 70,
-        backgroundColor: '#3B82F6',
-        opacity: 0.2,
-        shadowColor: '#3B82F6',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.8,
-        shadowRadius: 30,
     },
     avatarGradient: {
         width: 120,
@@ -284,7 +272,11 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 1,
+        shadowColor: '#3B82F6',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.25,
+        shadowRadius: 25,
+        elevation: 8,
     },
     cameraButton: {
         position: 'absolute',
@@ -316,25 +308,10 @@ const styles = StyleSheet.create({
         color: '#94A3B8',
         fontWeight: '500',
     },
-    
+
     // Achievement Card
     achievementWrapper: {
-        position: 'relative',
         marginBottom: 24,
-    },
-    achievementGlow: {
-        position: 'absolute',
-        top: 10,
-        left: 10,
-        right: 10,
-        bottom: -5,
-        backgroundColor: '#2563EB',
-        borderRadius: 28,
-        opacity: 0.08,
-        shadowColor: '#2563EB',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.5,
-        shadowRadius: 15,
     },
     achievementCard: {
         flexDirection: 'row',
@@ -342,11 +319,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 24,
         borderRadius: 28,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.03,
-        shadowRadius: 15,
-        elevation: 2,
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        shadowColor: '#3B82F6',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.1,
+        shadowRadius: 20,
+        elevation: 6,
     },
     trophyIcon: {
         width: 60,
@@ -381,7 +360,7 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontWeight: '800',
     },
-    
+
     // Stats Grid
     statsGrid: {
         flexDirection: 'row',
@@ -395,11 +374,13 @@ const styles = StyleSheet.create({
         padding: 24,
         borderRadius: 28,
         marginBottom: 16,
-        shadowColor: '#000',
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        shadowColor: '#3B82F6',
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.03,
+        shadowOpacity: 0.08,
         shadowRadius: 15,
-        elevation: 2,
+        elevation: 4,
     },
     statIcon: {
         width: 48,
@@ -420,32 +401,24 @@ const styles = StyleSheet.create({
         color: '#94A3B8',
         fontWeight: '600',
     },
-    
+
     // Pro Plan Card
     proWrapper: {
-        position: 'relative',
         marginBottom: 32,
         marginTop: 8,
-    },
-    proGlow: {
-        position: 'absolute',
-        top: 15,
-        left: 15,
-        right: 15,
-        bottom: -10,
-        backgroundColor: '#2563EB',
-        borderRadius: 32,
-        opacity: 0.25,
-        shadowColor: '#2563EB',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.6,
-        shadowRadius: 20,
     },
     proCard: {
         borderRadius: 32,
         padding: 28,
         overflow: 'hidden',
         position: 'relative',
+        borderWidth: 1.5,
+        borderColor: 'rgba(255,255,255,0.2)',
+        shadowColor: '#3B82F6',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.25,
+        shadowRadius: 25,
+        elevation: 8,
     },
     proCircle: {
         position: 'absolute',
@@ -499,7 +472,7 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         fontSize: 16,
     },
-    
+
     // Menu Items
     menuList: {
         marginBottom: 32,
@@ -511,11 +484,13 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 24,
         marginBottom: 16,
-        shadowColor: '#000',
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        shadowColor: '#3B82F6',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.02,
+        shadowOpacity: 0.05,
         shadowRadius: 10,
-        elevation: 1,
+        elevation: 2,
     },
     menuIconContainer: {
         width: 44,
@@ -532,7 +507,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#1E293B',
     },
-    
+
     // Log Out
     logoutButton: {
         flexDirection: 'row',
