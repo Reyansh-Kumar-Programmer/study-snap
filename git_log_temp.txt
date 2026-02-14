@@ -1,0 +1,10 @@
+e2b0478 Enhance profile screen with background blobs and thematic shadows
+23bdde9 Add yellowish glow effect to achievement card trophy icon
+1a47133 Premium profile screen with animations, haptics, and modern UI
+449f674 Revert profile screen to basic version
+9ce97e8 Add background glow effect to avatar circle
+a5ad779 Add background glow effect to avatar circle
+0ffa0d9 Add colored borders and drop shadows to profile cards
+34a8225 Fix lint errors by removing glow view references
+28ba1cc Update profile screen to use subtle bluish shadow effects like home screen
+884bd2b Complete profile screen redesign with premium UI and haptics
