@@ -1,1 +1,0 @@
-Remove sensitive .env file and update .gitignore - Commit #3
