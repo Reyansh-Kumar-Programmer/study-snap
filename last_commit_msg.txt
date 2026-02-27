@@ -1,2 +1,0 @@
-Enhance profile screen with background blobs and thematic shadows
-
