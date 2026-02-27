@@ -78,29 +78,28 @@ export default function ScanScreen() {
         enableTorch={flash === 'on'}
         ref={cameraRef}
         autofocus="on"
-      >
-        <View style={styles.controlsContainer}>
-          <View style={styles.topControls}>
-            <TouchableOpacity onPress={toggleFlash} style={styles.iconButton}>
-              <FontAwesome name={flash === 'on' ? "bolt" : "flash"} size={24} color="white" />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.bottomControls}>
-            <TouchableOpacity onPress={pickImage} style={styles.iconButton}>
-              <FontAwesome name="image" size={24} color="white" />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={takePicture} style={styles.captureButton}>
-              <View style={styles.captureInner} />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={toggleCameraType} style={styles.iconButton}>
-              <FontAwesome name="refresh" size={24} color="white" />
-            </TouchableOpacity>
-          </View>
+      />
+      <View style={styles.controlsOverlay}>
+        <View style={styles.topControls}>
+          <TouchableOpacity onPress={toggleFlash} style={styles.iconButton}>
+            <FontAwesome name={flash === 'on' ? "bolt" : "flash"} size={24} color="white" />
+          </TouchableOpacity>
         </View>
-      </CameraView>
+
+        <View style={styles.bottomControls}>
+          <TouchableOpacity onPress={pickImage} style={styles.iconButton}>
+            <FontAwesome name="image" size={24} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={takePicture} style={styles.captureButton}>
+            <View style={styles.captureInner} />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={toggleCameraType} style={styles.iconButton}>
+            <FontAwesome name="refresh" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
@@ -128,11 +127,12 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
-  controlsContainer: {
-    flex: 1,
+  controlsOverlay: {
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'space-between',
     padding: 20,
     paddingBottom: 40,
+    zIndex: 10,
   },
   topControls: {
     flexDirection: 'row',

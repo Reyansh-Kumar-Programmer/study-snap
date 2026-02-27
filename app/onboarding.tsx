@@ -48,12 +48,12 @@ export default function OnboardingScreen() {
         if (activeIndex < ONBOARDING_DATA.length - 1) {
             setActiveIndex(prev => prev + 1);
         } else {
-            router.replace('/(tabs)');
+            router.replace('/auth/login');
         }
     };
 
     const handleSkip = () => {
-        router.replace('/(tabs)');
+        router.replace('/auth/login');
     };
 
     const currentData = ONBOARDING_DATA[activeIndex];
