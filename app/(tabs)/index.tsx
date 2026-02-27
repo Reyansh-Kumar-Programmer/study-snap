@@ -8,6 +8,9 @@ import Animated, {
     FadeInDown,
     FadeInUp
 } from 'react-native-reanimated';
+import { getHistory } from '@/services/storageService';
+import { useFocusEffect } from 'expo-router';
+import { useCallback } from 'react';
 
 const { width } = Dimensions.get('window');
 
@@ -15,6 +18,25 @@ const AnimatedView = Animated.createAnimatedComponent(View);
 
 export default function HomeScreen() {
     const router = useRouter();
+    const [history, setHistory] = React.useState<any[]>([]);
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    const loadHistory = async () => {
+        try {
+            const data = await getHistory();
+            setHistory(data.slice(0, 5)); // Only show last 5 on home
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            loadHistory();
+        }, [])
+    );
 
     return (
         <View style={styles.container}>
@@ -104,7 +126,7 @@ export default function HomeScreen() {
                                 <Ionicons name="trophy" size={18} color="white" />
                             </View>
                         </View>
-                        <Text style={styles.statValue}>12</Text>
+                        <Text style={styles.statValue}>{history.length > 0 ? history.length : 12}</Text>
                         <Text style={styles.statLabel}>Scans this week</Text>
                     </View>
                 </AnimatedView>
@@ -136,7 +158,7 @@ export default function HomeScreen() {
                             <Ionicons name="time" size={14} color={Colors.textLight} style={{ marginRight: 4 }} />
                             <Text style={styles.footerText}>4 days left</Text>
                         </View>
-                        <Text style={styles.footerTextBold}>12/15 scans</Text>
+                        <Text style={styles.footerTextBold}>{history.length}/15 scans</Text>
                     </View>
                 </AnimatedView>
 
@@ -149,65 +171,40 @@ export default function HomeScreen() {
                         </TouchableOpacity>
                     </View>
 
-                    {/* Scan Item 1 */}
-                    <TouchableOpacity style={styles.scanItem} activeOpacity={0.6}>
-                        <View style={[styles.scanIconBox, { backgroundColor: '#DCFCE7' }]}>
-                            <Ionicons name="book" size={22} color="#16A34A" />
-                        </View>
-                        <View style={styles.scanInfo}>
-                            <Text style={styles.scanTitle}>Biology Chapter 5</Text>
-                            <View style={styles.scanMeta}>
-                                <View style={[styles.tag, { backgroundColor: '#DCFCE7' }]}>
-                                    <Text style={[styles.tagText, { color: '#16A34A' }]}>Biology</Text>
+                    {history.length > 0 ? (
+                        history.map((item, index) => (
+                            <TouchableOpacity
+                                key={item.id}
+                                style={styles.scanItem}
+                                activeOpacity={0.6}
+                                onPress={() => router.push(`/results/${item.id}`)}
+                            >
+                                <View style={[styles.scanIconBox, { backgroundColor: '#DBEAFE' }]}>
+                                    <Ionicons name="document-text" size={22} color={Colors.primary} />
                                 </View>
-                                <Text style={styles.dot}>•</Text>
-                                <Text style={styles.scanTime}><Ionicons name="time-outline" size={12} /> 2 hours ago</Text>
-                            </View>
-                        </View>
-                        <View style={styles.arrowBtn}>
-                            <Ionicons name="chevron-forward" size={14} color={Colors.textLight} />
-                        </View>
-                    </TouchableOpacity>
-
-                    {/* Scan Item 2 */}
-                    <TouchableOpacity style={styles.scanItem} activeOpacity={0.6}>
-                        <View style={[styles.scanIconBox, { backgroundColor: '#FEF3C7' }]}>
-                            <Ionicons name="book" size={22} color="#D97706" />
-                        </View>
-                        <View style={styles.scanInfo}>
-                            <Text style={styles.scanTitle}>History Notes - WWII</Text>
-                            <View style={styles.scanMeta}>
-                                <View style={[styles.tag, { backgroundColor: '#FEF3C7' }]}>
-                                    <Text style={[styles.tagText, { color: '#D97706' }]}>History</Text>
+                                <View style={styles.scanInfo}>
+                                    <Text style={styles.scanTitle} numberOfLines={1}>{item.explanation.slice(0, 30)}...</Text>
+                                    <View style={styles.scanMeta}>
+                                        <View style={[styles.tag, { backgroundColor: '#DCFCE7' }]}>
+                                            <Text style={[styles.tagText, { color: '#16A34A' }]}>Study Aid</Text>
+                                        </View>
+                                        <Text style={styles.dot}>•</Text>
+                                        <Text style={styles.scanTime}>
+                                            <Ionicons name="time-outline" size={12} /> {new Date(item.date).toLocaleDateString()}
+                                        </Text>
+                                    </View>
                                 </View>
-                                <Text style={styles.dot}>•</Text>
-                                <Text style={styles.scanTime}><Ionicons name="time-outline" size={12} /> Yesterday</Text>
-                            </View>
-                        </View>
-                        <View style={styles.arrowBtn}>
-                            <Ionicons name="chevron-forward" size={14} color={Colors.textLight} />
-                        </View>
-                    </TouchableOpacity>
-
-                    {/* Scan Item 3 */}
-                    <TouchableOpacity style={styles.scanItem} activeOpacity={0.6}>
-                        <View style={[styles.scanIconBox, { backgroundColor: '#DBEAFE' }]}>
-                            <Ionicons name="book" size={22} color="#2563EB" />
-                        </View>
-                        <View style={styles.scanInfo}>
-                            <Text style={styles.scanTitle}>Math Formulas</Text>
-                            <View style={styles.scanMeta}>
-                                <View style={[styles.tag, { backgroundColor: '#DBEAFE' }]}>
-                                    <Text style={[styles.tagText, { color: '#2563EB' }]}>Mathematics</Text>
+                                <View style={styles.arrowBtn}>
+                                    <Ionicons name="chevron-forward" size={14} color={Colors.textLight} />
                                 </View>
-                                <Text style={styles.dot}>•</Text>
-                                <Text style={styles.scanTime}><Ionicons name="time-outline" size={12} /> 2 days ago</Text>
-                            </View>
+                            </TouchableOpacity>
+                        ))
+                    ) : (
+                        <View style={styles.emptyContainer}>
+                            <Ionicons name="cloud-upload-outline" size={48} color="#E2E8F0" />
+                            <Text style={styles.emptyText}>No scans yet. Try scanning your notes!</Text>
                         </View>
-                        <View style={styles.arrowBtn}>
-                            <Ionicons name="chevron-forward" size={14} color={Colors.textLight} />
-                        </View>
-                    </TouchableOpacity>
+                    )}
 
                 </AnimatedView>
 
@@ -654,5 +651,22 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: '700',
-    }
+    },
+    emptyContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 40,
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderRadius: 24,
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        borderStyle: 'dashed',
+    },
+    emptyText: {
+        marginTop: 12,
+        fontSize: 14,
+        color: '#64748B',
+        fontWeight: '500',
+        textAlign: 'center',
+    },
 });

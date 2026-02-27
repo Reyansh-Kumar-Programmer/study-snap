@@ -44,8 +44,10 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack initialRouteName="onboarding">
+    <Stack initialRouteName="index">
+      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+      <Stack.Screen name="auth/login" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="results/[id]" options={{ headerShown: false, presentation: 'modal' }} />
       <Stack.Screen name="processing" options={{ headerShown: false, presentation: 'transparentModal' }} />
