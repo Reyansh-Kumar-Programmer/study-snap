@@ -20,7 +20,7 @@ export default function QuizScreen() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
     const [questions, setQuestions] = useState<Question[]>([]);
-    
+
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [showResult, setShowResult] = useState(false);
@@ -72,7 +72,7 @@ export default function QuizScreen() {
         <SafeAreaView style={[styles.container, styles.center]} edges={['top', 'bottom']}>
             <Stack.Screen options={{ headerShown: false }} />
             <LinearGradient colors={['#F8FAFC', '#EFF6FF']} style={StyleSheet.absoluteFillObject} />
-            
+
             <Animated.View entering={FadeInDown.duration(800).springify()} style={styles.scoreCard}>
                 <View style={styles.scoreIconBadge}>
                     <Ionicons name="trophy" size={48} color={Colors.primary} />
@@ -123,7 +123,7 @@ export default function QuizScreen() {
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
             <Stack.Screen options={{ headerShown: false }} />
             <LinearGradient colors={['#F8FAFC', '#EFF6FF']} style={StyleSheet.absoluteFillObject} />
-            
+
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()} style={styles.headerBtn}>
                     <Ionicons name="close" size={24} color={Colors.text} />
@@ -176,7 +176,7 @@ export default function QuizScreen() {
                             >
                                 <View style={styles.optionRow}>
                                     <View style={[
-                                        styles.optionDot, 
+                                        styles.optionDot,
                                         selectedOption === index && { borderColor: '#6366F1' },
                                         showResult && index === question.answer && { borderColor: '#10B981', backgroundColor: '#10B981' },
                                         showResult && index === selectedOption && index !== question.answer && { borderColor: '#EF4444', backgroundColor: '#EF4444' }
@@ -184,7 +184,7 @@ export default function QuizScreen() {
                                         {selectedOption === index && !showResult && <View style={styles.optionDotInner} />}
                                     </View>
                                     <Text style={[styles.optionText, { color: textColor }]}>{option}</Text>
-                                    
+
                                     {showResult && index === question.answer && (
                                         <Ionicons name="checkmark-circle" size={24} color="#10B981" />
                                     )}

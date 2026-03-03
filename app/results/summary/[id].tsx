@@ -36,7 +36,7 @@ export default function SummaryScreen() {
     return (
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
             <Stack.Screen options={{ headerShown: false }} />
-            
+
             <LinearGradient
                 colors={['#FFFBEB', '#FEF3C7', '#FFFFFF']}
                 style={StyleSheet.absoluteFillObject}
@@ -54,13 +54,13 @@ export default function SummaryScreen() {
                 </TouchableOpacity>
             </View>
 
-            <ScrollView 
-                style={styles.content} 
-                contentContainerStyle={styles.scrollContent} 
+            <ScrollView
+                style={styles.content}
+                contentContainerStyle={styles.scrollContent}
                 showsVerticalScrollIndicator={false}
             >
                 <Animated.View entering={FadeInDown.springify()} style={styles.iconContainer}>
-                     <LinearGradient
+                    <LinearGradient
                         colors={['#FDE68A', '#D97706']}
                         style={styles.iconCircle}
                     >
@@ -86,7 +86,7 @@ export default function SummaryScreen() {
                         <FontAwesome5 name="quote-right" size={20} color="#D97706" style={{ opacity: 0.2 }} />
                     </View>
                 </Animated.View>
-                
+
                 <View style={{ height: 60 }} />
             </ScrollView>
         </SafeAreaView>

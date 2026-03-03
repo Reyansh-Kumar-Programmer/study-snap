@@ -36,7 +36,7 @@ export default function RevisionSheetsScreen() {
     return (
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
             <Stack.Screen options={{ headerShown: false }} />
-            
+
             <LinearGradient
                 colors={['#F8FAFC', '#EFF6FF']}
                 style={StyleSheet.absoluteFillObject}
@@ -55,16 +55,16 @@ export default function RevisionSheetsScreen() {
                 <View style={[styles.headerBtn, { opacity: 0 }]} />
             </View>
 
-            <ScrollView 
-                style={styles.content} 
-                contentContainerStyle={styles.scrollContent} 
+            <ScrollView
+                style={styles.content}
+                contentContainerStyle={styles.scrollContent}
                 showsVerticalScrollIndicator={false}
             >
                 {data.summary.map((point: string, index: number) => {
                     return (
-                        <Animated.View 
-                            key={index} 
-                            entering={FadeInDown.delay(100 * index).springify()} 
+                        <Animated.View
+                            key={index}
+                            entering={FadeInDown.delay(100 * index).springify()}
                             style={styles.card}
                         >
                             <View style={styles.cardNumberBox}>

@@ -74,20 +74,20 @@ export default function ResultScreen() {
 
             {/* Transparent Header */}
             <View style={styles.header}>
-                <TouchableOpacity 
-                    onPress={() => router.back()} 
+                <TouchableOpacity
+                    onPress={() => router.back()}
                     style={styles.headerBtn}
                     activeOpacity={0.7}
                 >
                     <Ionicons name="chevron-back" size={24} color={Colors.text} />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Study Material</Text>
-                <View style={[styles.headerBtn, { opacity: 0 }]} /> 
+                <View style={[styles.headerBtn, { opacity: 0 }]} />
             </View>
 
-            <ScrollView 
-                style={styles.content} 
-                contentContainerStyle={styles.scrollContent} 
+            <ScrollView
+                style={styles.content}
+                contentContainerStyle={styles.scrollContent}
                 showsVerticalScrollIndicator={false}
             >
                 {/* Hero Scanned Image with Glassmorphism Overlays */}
@@ -116,8 +116,8 @@ export default function ResultScreen() {
                 {/* 4 Distinct Action Grid Options */}
                 <View style={styles.grid}>
                     {/* Explain the Solution */}
-                    <AnimatedTouchableOpacity 
-                        entering={FadeInDown.delay(300).springify()} 
+                    <AnimatedTouchableOpacity
+                        entering={FadeInDown.delay(300).springify()}
                         style={styles.gridItem}
                         onPress={() => router.push(`/results/explanation/${id}`)}
                         activeOpacity={0.8}
@@ -135,8 +135,8 @@ export default function ResultScreen() {
                     </AnimatedTouchableOpacity>
 
                     {/* Create Revision Sheet */}
-                    <AnimatedTouchableOpacity 
-                        entering={FadeInDown.delay(400).springify()} 
+                    <AnimatedTouchableOpacity
+                        entering={FadeInDown.delay(400).springify()}
                         style={styles.gridItem}
                         onPress={() => router.push(`/results/revision/${id}`)}
                         activeOpacity={0.8}
@@ -154,8 +154,8 @@ export default function ResultScreen() {
                     </AnimatedTouchableOpacity>
 
                     {/* Quick Summary */}
-                    <AnimatedTouchableOpacity 
-                        entering={FadeInDown.delay(500).springify()} 
+                    <AnimatedTouchableOpacity
+                        entering={FadeInDown.delay(500).springify()}
                         style={styles.gridItem}
                         onPress={() => router.push(`/results/summary/${id}`)}
                         activeOpacity={0.8}
@@ -173,8 +173,8 @@ export default function ResultScreen() {
                     </AnimatedTouchableOpacity>
 
                     {/* Practice Quiz */}
-                    <AnimatedTouchableOpacity 
-                        entering={FadeInDown.delay(600).springify()} 
+                    <AnimatedTouchableOpacity
+                        entering={FadeInDown.delay(600).springify()}
                         style={styles.gridItem}
                         onPress={() => router.push(`/results/quiz/${id}`)}
                         activeOpacity={0.8}
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     },
     gridItem: {
         width: (width - 40 - 16) / 2, // 2 items per row with 16 spacing
-        marginBottom: 0, 
+        marginBottom: 0,
     },
     cardInternal: {
         backgroundColor: '#FFFFFF',
