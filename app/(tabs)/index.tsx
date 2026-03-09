@@ -125,7 +125,7 @@ export default function HomeScreen() {
 
                         <TouchableOpacity
                             style={styles.modernSmallTile}
-                            onPress={() => router.push('/scan')}
+                            onPress={() => router.push('/revision/new')}
                             activeOpacity={0.8}
                         >
                             <View style={styles.modernBackground} />

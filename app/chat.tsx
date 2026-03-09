@@ -15,7 +15,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Markdown from 'react-native-markdown-display';
+import { MathMarkdown } from '@/components/MathMarkdown';
 import Animated, {
     FadeInDown,
     Layout,
@@ -231,9 +231,9 @@ export default function ChatScreen() {
                         item.sender === 'user' ? styles.userMessage : styles.aiMessage,
                         { marginTop: item.imageUri ? 5 : 0 }
                     ]}>
-                        <Markdown style={markdownStyles}>
+                        <MathMarkdown style={markdownStyles}>
                             {item.text}
-                        </Markdown>
+                        </MathMarkdown>
                     </View>
                 </View>
             </AnimatedView>
