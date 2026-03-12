@@ -21,6 +21,10 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    'FKGrotesk-Light': require('../assets/fonts/FKGroteskNeueTrial-Light-BF6576818c0f3e8.otf'),
+    'FKGrotesk-Medium': require('../assets/fonts/FKGroteskNeueTrial-Medium-BF6576818c3a00a.otf'),
+    'FKGrotesk-Regular': require('../assets/fonts/FKGroteskNeueTrial-Regular-BF6576818c3af74.otf'),
+    'Tiempos-Headline': require('../assets/fonts/TestTiemposHeadlineVF-Roman.ttf'),
     ...FontAwesome.font,
   });
 

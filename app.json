@@ -42,7 +42,9 @@
         {
           "photosPermission": "Allow StudySnap to access your photos to select notes."
         }
-      ]
+      ],
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

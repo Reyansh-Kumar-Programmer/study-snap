@@ -1,16 +1,14 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
-import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '@/constants/Colors';
+import { getHistory } from '@/services/storageService';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useFocusEffect, useRouter } from 'expo-router';
+import React, { useCallback } from 'react';
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
     FadeInDown,
     FadeInUp
 } from 'react-native-reanimated';
-import { getHistory } from '@/services/storageService';
-import { useFocusEffect } from 'expo-router';
-import { useCallback } from 'react';
 
 const { width } = Dimensions.get('window');
 
@@ -76,63 +74,108 @@ export default function HomeScreen() {
                     <Text style={styles.subHeading}>Let's turn your notes into knowledge</Text>
                 </AnimatedView>
 
-                {/* Upload Card */}
-                <AnimatedView entering={FadeInDown.delay(200).springify()}>
-                    <TouchableOpacity
-                        style={styles.uploadCard}
-                        onPress={() => router.push({ pathname: '/scan', params: { mode: 'gallery' } })}
-                        activeOpacity={0.7}
-                    >
-                        <View style={styles.uploadIconContainer}>
-                            <LinearGradient
-                                colors={['#D946EF', '#8B5CF6']}
-                                style={styles.uploadGradient}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
+                {/* Bento Grid */}
+                <View style={styles.bentoGrid}>
+                    <View style={styles.bentoRow}>
+
+                        <AnimatedView entering={FadeInDown.delay(200).springify()} style={[styles.premiumBentoItemLight, styles.bentoLarge, styles.glowIndigoLight]}>
+                            <TouchableOpacity
+                                style={styles.bentoCardInner}
+                                activeOpacity={0.8}
                             >
-                                <Ionicons name="image" size={22} color="white" />
-                            </LinearGradient>
-                        </View>
-                        <View style={styles.uploadTextContainer}>
-                            <Text style={styles.uploadTitle}>Upload from Gallery</Text>
-                            <Text style={styles.uploadSubtitle}>Select existing photos</Text>
-                        </View>
-                        <View style={styles.lightningIcon}>
-                            <Ionicons name="flash" size={14} color={Colors.primary} />
-                        </View>
-                    </TouchableOpacity>
-                </AnimatedView>
-
-                {/* Stats Row */}
-                <AnimatedView entering={FadeInDown.delay(300).springify()} style={styles.statsRow}>
-                    {/* Streak Card */}
-                    <View style={styles.statCard}>
-                        <View style={styles.statHeader}>
-                            <View style={[styles.statIcon, { backgroundColor: '#F59E0B' }]}>
-                                <Ionicons name="flame" size={20} color="white" />
-                            </View>
-                            <View style={styles.badgeSuccess}>
-                                <Text style={styles.badgeText}>+2</Text>
-                            </View>
-                        </View>
-                        <Text style={styles.statValue}>7</Text>
-                        <Text style={styles.statLabel}>Day Streak</Text>
+                                <LinearGradient
+                                    colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.6)']}
+                                    style={styles.premiumGradient}
+                                >
+                                    <View style={[styles.premiumAbstractGlowLight, { backgroundColor: '#4F46E5', top: -40, right: -30, width: 140, height: 140, borderRadius: 70 }]} />
+                                    <LinearGradient
+                                        colors={['rgba(79, 70, 229, 0.15)', 'rgba(79, 70, 229, 0.05)']}
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                                        style={[styles.iconWrapperPremiumLight, { borderColor: 'rgba(79, 70, 229, 0.3)' }]}
+                                    >
+                                        <Ionicons name="chatbubble-ellipses" size={28} color="#4F46E5" />
+                                    </LinearGradient>
+                                    <View style={styles.bentoTextContainer}>
+                                        <Text style={styles.premiumTitleLight}>Chat with AI</Text>
+                                        <Text style={styles.premiumSubtitleLight}>Ask anything about your notes</Text>
+                                    </View>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </AnimatedView>
                     </View>
 
-                    {/* Scans Card */}
-                    <View style={styles.statCard}>
-                        <View style={styles.statHeader}>
-                            <View style={[styles.statIcon, { backgroundColor: Colors.primary }]}>
-                                <Ionicons name="trophy" size={18} color="white" />
-                            </View>
-                        </View>
-                        <Text style={styles.statValue}>{history.length > 0 ? history.length : 12}</Text>
-                        <Text style={styles.statLabel}>Scans this week</Text>
+                    <View style={styles.bentoRow}>
+
+                        <AnimatedView entering={FadeInDown.delay(300).springify()} style={[styles.premiumBentoItemLight, styles.bentoSmall, styles.glowSkyLight]}>
+                            <TouchableOpacity
+                                style={styles.bentoCardInner}
+                                onPress={() => router.push('/scan')}
+                                activeOpacity={0.8}
+                            >
+                                <LinearGradient colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.6)']} style={styles.premiumGradientSmall}>
+                                    <View style={[styles.premiumAbstractGlowLight, { backgroundColor: '#0EA5E9', bottom: -20, right: -20, width: 100, height: 100, borderRadius: 50 }]} />
+                                    <LinearGradient
+                                        colors={['rgba(14, 165, 233, 0.15)', 'rgba(14, 165, 233, 0.05)']}
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                                        style={[styles.iconWrapperPremiumSmallLight, { borderColor: 'rgba(14, 165, 233, 0.3)' }]}
+                                    >
+                                        <Ionicons name="scan" size={24} color="#0EA5E9" />
+                                    </LinearGradient>
+                                    <Text style={styles.premiumTitleSmallLight}>Scan your{"\n"}Question</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </AnimatedView>
+
+
+                        <AnimatedView entering={FadeInDown.delay(350).springify()} style={[styles.premiumBentoItemLight, styles.bentoSmall, styles.glowPurpleLight]}>
+                            <TouchableOpacity
+                                style={styles.bentoCardInner}
+                                activeOpacity={0.8}
+                            >
+                                <LinearGradient colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.6)']} style={styles.premiumGradientSmall}>
+                                    <View style={[styles.premiumAbstractGlowLight, { backgroundColor: '#8B5CF6', bottom: -20, right: -20, width: 100, height: 100, borderRadius: 50 }]} />
+                                    <LinearGradient
+                                        colors={['rgba(139, 92, 246, 0.15)', 'rgba(139, 92, 246, 0.05)']}
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                                        style={[styles.iconWrapperPremiumSmallLight, { borderColor: 'rgba(139, 92, 246, 0.3)' }]}
+                                    >
+                                        <Ionicons name="newspaper" size={24} color="#8B5CF6" />
+                                    </LinearGradient>
+                                    <Text style={styles.premiumTitleSmallLight}>Revision{"\n"}Sheet</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </AnimatedView>
                     </View>
-                </AnimatedView>
+
+                    <View style={styles.bentoRow}>
+
+                        <AnimatedView entering={FadeInDown.delay(400).springify()} style={[styles.premiumBentoItemLight, styles.bentoFull, styles.glowPinkLight]}>
+                            <TouchableOpacity
+                                style={styles.bentoCardInner}
+                                activeOpacity={0.8}
+                            >
+                                <LinearGradient colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.6)']} style={styles.premiumRowContent}>
+                                    <View style={[styles.premiumAbstractGlowLight, { backgroundColor: '#F472B6', top: -30, right: 10, width: 140, height: 140, borderRadius: 70 }]} />
+                                    <LinearGradient
+                                        colors={['rgba(244, 114, 182, 0.15)', 'rgba(244, 114, 182, 0.05)']}
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                                        style={[styles.iconWrapperPremiumLight, { borderColor: 'rgba(244, 114, 182, 0.3)', margin: 0, marginRight: 16, marginBottom: 0 }]}
+                                    >
+                                        <Ionicons name="clipboard" size={28} color="#F472B6" />
+                                    </LinearGradient>
+                                    <View style={{ flex: 1, zIndex: 10 }}>
+                                        <Text style={styles.premiumTitleFullRowLight}>Generate Mock Test</Text>
+                                        <Text style={styles.premiumSubtitleLight}>Test your knowledge with AI</Text>
+                                    </View>
+                                    <Ionicons name="chevron-forward" size={22} color="#0F172A" />
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </AnimatedView>
+                    </View>
+                </View>
 
                 {/* Weekly Progress */}
-                <AnimatedView entering={FadeInDown.delay(400).springify()} style={styles.progressCard}>
+                <AnimatedView entering={FadeInDown.delay(500).springify()} style={styles.progressCard}>
                     <View style={styles.progressHeader}>
                         <View>
                             <Text style={styles.progressTitle}>Weekly Progress</Text>
@@ -163,7 +206,7 @@ export default function HomeScreen() {
                 </AnimatedView>
 
                 {/* Recent Scans */}
-                <AnimatedView entering={FadeInDown.delay(500).springify()} style={styles.recentSection}>
+                <AnimatedView entering={FadeInDown.delay(600).springify()} style={styles.recentSection}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Recent Scans</Text>
                         <TouchableOpacity onPress={() => router.push('/profile')}>
@@ -211,6 +254,7 @@ export default function HomeScreen() {
                 {/* Space for FAB */}
                 <View style={{ height: 100 }} />
             </ScrollView>
+
 
             {/* Static Floating Scan Button */}
             <AnimatedView
@@ -358,109 +402,136 @@ const styles = StyleSheet.create({
         color: Colors.textLight,
         fontWeight: '400',
     },
-    uploadCard: {
-        backgroundColor: 'white',
+    bentoGrid: {
+        marginBottom: 24,
+        gap: 12,
+    },
+    bentoRow: {
+        flexDirection: 'row',
+        gap: 12,
+    },
+    premiumBentoItemLight: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slight opacity to enable glass effect
         borderRadius: 24,
-        padding: 16,
+        overflow: 'hidden',
+        borderWidth: 1, // User requested 1px
+        borderColor: '#E2E8F0', // Light greyish border requested for bento items
+    },
+    glowIndigoLight: {
+        shadowColor: '#4F46E5',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.08,
+        shadowRadius: 24,
+        elevation: 8,
+    },
+    glowSkyLight: {
+        shadowColor: '#0EA5E9',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.08,
+        shadowRadius: 24,
+        elevation: 8,
+    },
+    glowPurpleLight: {
+        shadowColor: '#8B5CF6',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.08,
+        shadowRadius: 24,
+        elevation: 8,
+    },
+    glowPinkLight: {
+        shadowColor: '#F472B6',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.08,
+        shadowRadius: 24,
+        elevation: 8,
+    },
+    bentoLarge: {
+        flex: 1,
+        height: 160,
+    },
+    bentoSmall: {
+        flex: 1,
+        height: 140, // Keeps the increased height request
+    },
+    bentoFull: {
+        flex: 1,
+        height: 90,
+    },
+    bentoCardInner: {
+        flex: 1,
+    },
+    premiumGradient: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+    },
+    premiumGradientSmall: {
+        flex: 1,
+        padding: 18,
+        justifyContent: 'center',
+    },
+    premiumRowContent: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 20,
-        borderWidth: 1.5,
-        borderColor: '#E2E8F0',
-        shadowColor: '#3B82F6',
-        shadowOffset: { width: 0, height: 12 },
-        shadowOpacity: 0.1,
-        shadowRadius: 20,
-        elevation: 6,
+        paddingHorizontal: 20,
     },
-    uploadIconContainer: {
-        marginRight: 12,
+    iconWrapperPremiumLight: {
+        width: 52,
+        height: 52,
+        borderRadius: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 14,
+        borderWidth: 1,
     },
-    uploadGradient: {
-        width: 48,
-        height: 48,
+    iconWrapperPremiumSmallLight: {
+        width: 44,
+        height: 44,
         borderRadius: 14,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    uploadTextContainer: {
-        flex: 1,
-    },
-    uploadTitle: {
-        fontSize: 15,
-        fontWeight: '700',
-        color: Colors.text,
-        marginBottom: 1,
-    },
-    uploadSubtitle: {
-        fontSize: 13,
-        color: Colors.textLight,
-    },
-    lightningIcon: {
-        width: 32,
-        height: 32,
-        borderRadius: 10,
-        backgroundColor: '#F8FAFC',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: '#E2E8F0',
-    },
-    statsRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 20,
-    },
-    statCard: {
-        width: '48%',
-        backgroundColor: 'white',
-        borderRadius: 24,
-        padding: 16,
-        borderWidth: 1.5,
-        borderColor: '#E2E8F0',
-        shadowColor: '#3B82F6',
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.08,
-        shadowRadius: 15,
-        elevation: 4,
-    },
-    statHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
         marginBottom: 12,
-    },
-    statIcon: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    badgeSuccess: {
-        backgroundColor: '#DCFCE7',
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#B7E4C7',
     },
-    badgeText: {
-        color: '#16A34A',
-        fontSize: 12,
-        fontWeight: '700',
+    bentoTextContainer: {
+        flex: 1,
+        zIndex: 10,
     },
-    statValue: {
-        fontSize: 26,
+    premiumTitleLight: {
+        fontSize: 22,
         fontWeight: '700',
-        color: Colors.text,
-        marginBottom: 2,
+        color: '#0F172A', // Dark Slate for crisp contrast on light background
         letterSpacing: -0.5,
     },
-    statLabel: {
-        fontSize: 13,
-        color: Colors.textLight,
-        fontWeight: '500',
+    premiumTitleSmallLight: {
+        fontSize: 16,
+        fontWeight: '400', // Regular as requested previously
+        color: '#334155', // Rich grey
+        lineHeight: 22,
+        zIndex: 10,
+    },
+    premiumTitleFullRowLight: {
+        fontSize: 17,
+        fontWeight: '500', // Medium as requested previously
+        color: '#0F172A',
+        marginBottom: 2,
+    },
+    premiumSubtitleLight: {
+        fontSize: 14,
+        color: '#64748B', // Soft grey
+        fontWeight: '400',
+        marginTop: 2,
+        zIndex: 10,
+    },
+    premiumAbstractGlowLight: {
+        position: 'absolute',
+        width: 160,
+        height: 160,
+        borderRadius: 80,
+        zIndex: 0,
+        filter: 'blur(45px)', // Increased blur for pure "ambient glow"
+        opacity: 0.15, // Extremely subtle so it acts as lighting instead of a background blob
     },
     progressCard: {
         backgroundColor: 'white',
