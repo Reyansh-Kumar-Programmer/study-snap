@@ -4,6 +4,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,13 +49,18 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack initialRouteName="index">
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-      <Stack.Screen name="auth/login" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="results/[id]" options={{ headerShown: false, presentation: 'modal' }} />
-      <Stack.Screen name="processing" options={{ headerShown: false, presentation: 'transparentModal' }} />
-    </Stack>
+    <KeyboardProvider>
+      <Stack initialRouteName="index">
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="chat" options={{ headerShown: false }} />
+        <Stack.Screen name="results/[id]" options={{ headerShown: false, presentation: 'modal' }} />
+        <Stack.Screen name="processing" options={{ headerShown: false, presentation: 'transparentModal' }} />
+        <Stack.Screen name="revision/index" options={{ headerShown: false }} />
+        <Stack.Screen name="revision/sheet" options={{ headerShown: false }} />
+      </Stack>
+    </KeyboardProvider>
   );
 }

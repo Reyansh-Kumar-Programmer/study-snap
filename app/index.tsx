@@ -29,7 +29,7 @@ export default function SplashScreen() {
         logoOpacity.value = withTiming(1, { duration: 1000 });
 
         titleOpacity.value = withDelay(600, withTiming(1, { duration: 800 }));
-        titleTranslateY.value = withDelay(600, withTiming(0, { duration: 800, easing: Easing.out(Easing.back(1.5)) }));
+        titleTranslateY.value = withDelay(600, withSpring(0, { damping: 15 }));
 
         // Navigate to onboarding after delay
         const timer = setTimeout(() => {

@@ -81,6 +81,7 @@ export default function HomeScreen() {
                         <AnimatedView entering={FadeInDown.delay(200).springify()} style={[styles.premiumBentoItemLight, styles.bentoLarge, styles.glowIndigoLight]}>
                             <TouchableOpacity
                                 style={styles.bentoCardInner}
+                                onPress={() => router.push('/chat')}
                                 activeOpacity={0.8}
                             >
                                 <LinearGradient
@@ -130,6 +131,7 @@ export default function HomeScreen() {
                         <AnimatedView entering={FadeInDown.delay(350).springify()} style={[styles.premiumBentoItemLight, styles.bentoSmall, styles.glowPurpleLight]}>
                             <TouchableOpacity
                                 style={styles.bentoCardInner}
+                                onPress={() => router.push('/revision')}
                                 activeOpacity={0.8}
                             >
                                 <LinearGradient colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.6)']} style={styles.premiumGradientSmall}>
